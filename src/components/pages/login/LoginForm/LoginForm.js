@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom'; // Replaced Redirect with Navigate
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import userPool from '../../../../aws-cognito/aws-cognito';
 
@@ -9,7 +8,6 @@ import Input from '../../../UI/Input/Input';
 import Button from '../../../UI/Button/Button';
 import ErrorDisplay from '../../../Util/ErrorDisplay/ErrorDisplay';
 import Spinner from '../../../UI/Spinner/Spinner';
-import { Redirect } from 'react-router';
 
 import * as actions from '../../../../store/actions/actions';
 
@@ -53,7 +51,7 @@ const LoginForm = (props) => {
           });
         });
       } catch (error) {
-        console.error('Error during authentication1:', error);
+        console.error('Error during authentication:', error);
       }
     } else {
       props.emailAuthFail('Please fill up all fields');
@@ -62,7 +60,7 @@ const LoginForm = (props) => {
 
   return (
     <div>
-      {props.registered ? <Redirect to="/login" /> : null}
+      {props.registered ? <Navigate to="/login" /> : null} {/* Replaced Redirect with Navigate */}
       {props.isLoading ? (
         <Spinner />
       ) : (

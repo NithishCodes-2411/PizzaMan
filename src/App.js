@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Suspense } from 'react';
 import { lazy } from 'react';
 
-const Login = lazy(() => import('./components/pages/login/login'));
-
+const Login = lazy(() => import('./components/Pages/Login/Login.js'));
+const Register = lazy(() => import('./components/Pages/Register/Register.js'));
 
 function App() {
   return (
-    <Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
       <div className="App">
         <header className="App-header">
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Login />} />
-            </Routes>
-          </BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            {/* Add more routes as needed */}
+          </Routes>
         </header>
       </div>
     </Suspense>
